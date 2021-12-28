@@ -10,7 +10,7 @@
 Unity does not provides a default script API to use both 2D and 3D colliders at the same time. 
 This package tries to fix this by using adapter classes implementing an abstract component, to which implements an ICollider interface:
 
-![The Class Diagram][class-diagram]
+![The Class Diagram](https://bitbucket.org/nostgameteam/collider-adapter/src/main/Docs~/class-diagram.png)
 
 You can reference and use the AbstractColliderAdapter component to query the collider properties and functions.
 
@@ -43,13 +43,13 @@ public class Collider2DTests : MonoBehaviour
 
 Go to inspector and set the ```Filter``` attribute. 
 
-![The Collider2DTests inspector][inspector-collider2dtests]
+![The Collider2DTests inspector](https://bitbucket.org/nostgameteam/collider-adapter/src/main/Docs~/inspector-collider2dtests.png)
 
 Now you can move the GameObject and test the cast collision on the Scene:
 
-![Using a BoxCollider2D][box-collider-example]
+![Using a BoxCollider2D](https://bitbucket.org/nostgameteam/collider-adapter/src/main/Docs~/box-collider.gif)
 
-![Using a CircleCollider][circle-collider-example]
+![Using a CircleCollider](https://bitbucket.org/nostgameteam/collider-adapter/src/main/Docs~/circle-collider.gif)
 
 There are the same extensions for Colliders in 3D.
 
@@ -77,8 +77,3 @@ Use the **Package Manager** "Add package from git URL..." feature or add manuall
 [BitBucket](https://bitbucket.org/HyagoGow/) -
 [LinkedIn](https://www.linkedin.com/in/hyago-oliveira/) -
 <hyagogow@gmail.com>
-
-[class-diagram]: https://bitbucket.org/nostgameteam/collider-adapter/src/main/Docs~/class-diagram.png
-[box-collider-example]: https://bitbucket.org/nostgameteam/collider-adapter/src/main/Docs~/box-collider.gif
-[circle-collider-example]: https://bitbucket.org/nostgameteam/collider-adapter/src/main/Docs~/circle-collider.gif
-[inspector-collider2dtests]: https://bitbucket.org/nostgameteam/collider-adapter/src/main/Docs~/inspector-collider2dtests.png
