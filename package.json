@@ -1,0 +1,25 @@
+{
+  "name": "com.actioncode.collider-adapter",
+  "displayName": "ActionCode-Collider Adapter",
+  "version": "0.1.0",
+  "unity": "2019.3",
+  "description": "This package contains abstract adapter classes for 2D and 3D Colliders.",
+  "keywords": [
+    "Adapters",
+    "Collision"
+  ],
+  "category": "Scripts",
+  "dependencies": {},
+  "license": "MIT",
+  "homepage": "https://bitbucket.org/nostgameteam/collider-adapter#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://bitbucket.org/nostgameteam/collider-adapter.git"
+  },
+  "documentationUrl": "https://bitbucket.org/nostgameteam/collider-adapter#readme",
+  "changelogUrl": "https://bitbucket.org/nostgameteam/collider-adapter/CHANGELOG.md",
+  "author": {
+    "name": "Hyago Oliveira",
+    "email": "hyagogow@gmail.com"
+  }
+}
