@@ -1,0 +1,145 @@
+using UnityEngine;
+
+namespace ActionCode.ColliderAdapter
+{
+    /// <summary>
+    /// Abstract Adapter Component for 2D or 3D Colliders.
+    /// </summary>
+    [DisallowMultipleComponent]
+    public abstract class AbstractColliderAdapter : MonoBehaviour, ICollider
+    {
+        public virtual bool Enabled
+        {
+            get => enabled;
+            set => enabled = value;
+        }
+
+        public abstract bool IsTrigger { get; set; }
+
+        public abstract Bounds Bounds { get; }
+
+        public abstract Vector3 Center { get; }
+
+        public abstract Vector3 Offset { get; set; }
+
+        public abstract Vector3 Size { get; set; }
+
+        public Vector3 HalfSize => Bounds.extents;
+
+        public const int MAX_RAYS_COUNT = 64;
+        public static readonly Color CLOSEST_COLLISION = Color.yellow;
+
+        protected virtual void Reset() => FindCollider();
+
+        public abstract Vector3 ClosestPoint(Vector3 position);
+
+        public abstract bool IsColliding(int layerMask);
+
+        public abstract bool TryToGetCollidingComponent<T>(int layerMask, out T component);
+
+        public abstract int TryToGetCollidingComponents<T>(int layerMask, T[] components);
+
+        public abstract bool Cast(Vector3 direction, out IRaycastHit hit, float maxDistance, int layerMask);
+
+        /// <summary>
+        /// Casts a Ray against Colliders in the Scene, gathering 
+        /// information about the first Collider to contact with.
+        /// </summary>
+        /// <param name="origin">The Raycast origin.</param>
+        /// <param name="direction">The Raycast direction.</param>
+        /// <param name="closestHit">The cast information about the first detected object.</param>
+        /// <param name="distance">The Raycast distance.</param>
+        /// <param name="mask">Filter to detect Colliders only on certain layers.</param>
+        /// <param name="draw">Draws the raycast if enabled.</param>
+        /// <returns>Whether the Raycast hits any collider in the Scene.</returns>
+        public abstract bool Raycast(Vector3 origin, Vector3 direction, out IRaycastHit closestHit,
+            float distance, int mask, bool draw = false);
+
+        public virtual bool Raycasts(Vector3 point1, Vector3 point2, Vector3 direction,
+            out IRaycastHit closestHit, float distance, int mask,
+            float angleLimit = 0f, int raysCount = 2, bool draw = false)
+        {
+            closestHit = default;
+            raysCount = Mathf.Min(raysCount, MAX_RAYS_COUNT);
+
+            var fractionDivider = Mathf.Max(1, raysCount - 1);
+            var fraction = 1F / fractionDivider;
+            var closestDistance = distance;
+
+            for (int i = 0; i < raysCount; i++)
+            {
+                var origin = Vector3.Lerp(point1, point2, i * fraction);
+                var wasHit = Raycast(origin, direction, out IRaycastHit hit, distance, mask, draw);
+                var isClosestHit = wasHit && hit.Distance < closestDistance;
+
+                if (isClosestHit && IsAllowedAngle(hit.Normal, angleLimit))
+                {
+                    closestDistance = hit.Distance;
+                    closestHit = hit;
+                }
+            }
+
+            var hasClosestHit = closestHit != null && closestHit.HasCollider();
+            if (hasClosestHit && draw) closestHit.Point.Draw(CLOSEST_COLLISION);
+            return hasClosestHit;
+        }
+
+        /// <summary>
+        /// Checks if the given bounds is completely inside this collider.
+        /// </summary>
+        /// <param name="bounds">A Bounds structure to check.</param>
+        /// <returns>True if inside this collider. False otherwise.</returns>
+        public bool IsInside(Bounds bounds) => Bounds.Contains(bounds.min) && Bounds.Contains(bounds.max);
+
+        /// <summary>
+        /// Checks if overlapping with the given bounds.
+        /// </summary>
+        /// <param name="bounds">A Bounds structure to check.</param>
+        /// <returns>True if overlapping with the bounds. False otherwise.</returns>
+        public bool IsOverlapping(Bounds bounds) => Bounds.Contains(bounds.min) || Bounds.Contains(bounds.max);
+
+        protected static bool IsAllowedAngle(Vector3 normal, float limit)
+        {
+            var angle = Vector3.Angle(normal, Vector3.up);
+            return angle > limit || Mathf.Approximately(angle, limit);
+        }
+
+        #region Editor
+        protected abstract void FindCollider();
+
+        /// <summary>
+        /// Displays a message for the user to choose which Collider component to use.
+        /// <para><b>This function should only be used on Editor time</b>, like MonoBehaviour.Reset()</para>
+        /// </summary>
+        /// <returns>An implementation of <see cref="AbstractColliderAdapter"/>.</returns>
+        public static AbstractColliderAdapter ResolveCollider(GameObject gameObject)
+        {
+            var collider = gameObject.GetComponent<AbstractColliderAdapter>();
+            if (collider == null)
+            {
+                var hasBoxCollider = gameObject.TryGetComponent(out BoxCollider _);
+                var hasBoxCollider2D = gameObject.TryGetComponent(out BoxCollider2D _);
+
+                if (hasBoxCollider) collider = gameObject.AddComponent<Collider3DAdapter>();
+                else if (hasBoxCollider2D) collider = gameObject.AddComponent<Collider2DAdapter>();
+            }
+
+#if UNITY_EDITOR
+            if (CanDisplayEditorDialog() && collider == null)
+            {
+                const string title = "Adding required Collider";
+                const string message = "You need a Collider component.\nChoose one of the following options:";
+                bool use2D = UnityEditor.EditorUtility.DisplayDialog(title, message, "Use for 2D", "Use for 3D");
+
+                // Cannot use conditional expression here (collider = use2D ? ... : ...;)
+                if (use2D) collider = gameObject.AddComponent<Collider2DAdapter>();
+                else collider = gameObject.AddComponent<Collider3DAdapter>();
+            }
+#endif
+            return collider;
+        }
+
+        protected static bool CanDisplayEditorDialog() => Application.isEditor && !Application.isBatchMode;
+        #endregion
+    }
+}
