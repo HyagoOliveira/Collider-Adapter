@@ -2,12 +2,13 @@
 
 * Abstract adapter classes for 2D and 3D Colliders.
 * Unity minimum version: **2019.3**
-* Current version: **0.1.0**
+* Current version: **1.0.0**
 * License: **MIT**
 
 ## Summary
 
 Unity does not provides a default script API to use both 2D and 3D colliders at the same time. 
+
 This package tries to fix this by using adapter classes implementing an abstract component, to which implements an ICollider interface:
 
 ![The Class Diagram](Docs~/class-diagram.png)
