@@ -1,7 +1,7 @@
 {
   "name": "com.actioncode.collider-adapter",
   "displayName": "ActionCode-Collider Adapter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "unity": "2019.3",
   "description": "This package contains abstract adapter classes for 2D and 3D Colliders.",
   "keywords": [
