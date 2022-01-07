@@ -57,8 +57,7 @@ namespace ActionCode.ColliderAdapter
 
         public override Bounds Bounds => collider.bounds;
 
-        private readonly RaycastHit2D[] hitBuffer = new RaycastHit2D[1];
-        private readonly Collider2D[] colliderBuffer = new Collider2D[10];
+        private readonly Collider2D[] colliderBuffer = new Collider2D[10];        
 
         protected override void Reset()
         {
@@ -75,20 +74,25 @@ namespace ActionCode.ColliderAdapter
             return hit;
         }
 
-        public override bool Cast(Vector3 direction, out IRaycastHit hit, float maxDistance, int layerMask)
+        public override bool Cast(Vector3 direction, out IRaycastHit hit, float maxDistance, int layerMask, bool draw = false)
         {
             hit = default;
-            var filter = new ContactFilter2D
+            var hasCollisions = false;
+            RaycastHit2D collisionHit = default;
+
+            if (collider is BoxCollider2D box)
             {
-                useLayerMask = true,
-                layerMask = layerMask,
-                useDepth = true,
-                minDepth = minDepth,
-                maxDepth = maxDepth
-            };
-            int collisions = collider.Cast(direction, filter, hitBuffer, maxDistance);
-            var hasCollisions = collisions > 0;
-            if (hasCollisions) hit = new RaycastHit2DAdapter(hitBuffer[0]);
+                var angle = transform.eulerAngles.z;
+                box.Cast(DEFAULT_OFFSET, direction, maxDistance, layerMask,
+                    out collisionHit, angle, minDepth, maxDepth, DEFAULT_SKIN, draw);
+            }
+            else if (collider is CircleCollider2D circle)
+            {
+                circle.Cast(DEFAULT_OFFSET, direction, maxDistance, layerMask,
+                    out collisionHit, minDepth, maxDepth, DEFAULT_SKIN, draw);
+            }
+
+            if (hasCollisions) hit = new RaycastHit2DAdapter(collisionHit);
             return hasCollisions;
         }
 

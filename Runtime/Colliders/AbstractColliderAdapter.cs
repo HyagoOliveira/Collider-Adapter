@@ -27,6 +27,8 @@ namespace ActionCode.ColliderAdapter
         public Vector3 HalfSize => Bounds.extents;
 
         public const int MAX_RAYS_COUNT = 64;
+        public const float DEFAULT_SKIN = 0F;
+        public static readonly Vector3 DEFAULT_OFFSET = Vector3.zero;
         public static readonly Color CLOSEST_COLLISION = Color.yellow;
 
         protected virtual void Reset() => FindCollider();
@@ -39,7 +41,7 @@ namespace ActionCode.ColliderAdapter
 
         public abstract int TryToGetCollidingComponents<T>(int layerMask, T[] components);
 
-        public abstract bool Cast(Vector3 direction, out IRaycastHit hit, float maxDistance, int layerMask);
+        public abstract bool Cast(Vector3 direction, out IRaycastHit hit, float maxDistance, int layerMask, bool draw = false);
 
         /// <summary>
         /// Casts a Ray against Colliders in the Scene, gathering 

@@ -81,8 +81,9 @@ namespace ActionCode.ColliderAdapter
         /// <param name="hit">The cast information about the first detected object.</param>
         /// <param name="maxDistance">The maximum cast distance.</param>
         /// <param name="layerMask">Filter to detect Colliders only on certain layers.</param>
+        /// <param name="draw">Draws the cast if enabled.</param>
         /// <returns>Whether the cast hits any Collider in the Scene.</returns>
-        bool Cast(Vector3 direction, out IRaycastHit hit, float maxDistance, int layerMask);
+        bool Cast(Vector3 direction, out IRaycastHit hit, float maxDistance, int layerMask, bool draw = false);
 
         /// <summary>
         /// Casts multiples rays along the given point1 and point2 against Colliders in the Scene, 

@@ -129,11 +129,23 @@ namespace ActionCode.ColliderAdapter
             return hasClosestHit;
         }
 
-        public override bool Cast(Vector3 direction, out IRaycastHit hit, float maxDistance, int layerMask)
+        public override bool Cast(Vector3 direction, out IRaycastHit hit, float maxDistance, int layerMask, bool draw = false)
         {
             hit = default;
-            var hasCollisions = Physics.BoxCast(Center, HalfSize, direction,
-                out RaycastHit collisionHit, transform.rotation, maxDistance, layerMask);
+            var hasCollisions = false;
+            RaycastHit collisionHit = default;
+
+            if (collider is BoxCollider box)
+            {
+                box.Cast(DEFAULT_OFFSET, direction, maxDistance, layerMask,
+                    out collisionHit, DEFAULT_SKIN, draw);
+            }
+            else if (collider is SphereCollider sphere)
+            {
+                sphere.Cast(DEFAULT_OFFSET, direction, maxDistance, layerMask,
+                    out collisionHit, DEFAULT_SKIN, draw);
+            }
+
             if (hasCollisions) hit = new RaycastHit3DAdapter(collisionHit);
             return hasCollisions;
         }
