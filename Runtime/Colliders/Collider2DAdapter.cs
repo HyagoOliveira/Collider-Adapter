@@ -9,7 +9,9 @@ namespace ActionCode.ColliderAdapter
     public class Collider2DAdapter : AbstractColliderAdapter
     {
         [SerializeField, Tooltip("The local Collider2D component.")]
-        private new Collider2D collider = null;
+#pragma warning disable CS0108 // Member hides inherited member; missing new keyword
+        private Collider2D collider = null;
+#pragma warning restore CS0108 // Member hides inherited member; missing new keyword
         [Tooltip("Only detect objects with a Z coordinate (depth) greater than this value.")]
         public float minDepth = 0;
         [Tooltip("Only detect objects with a Z coordinate (depth) less than this value.")]
@@ -57,7 +59,7 @@ namespace ActionCode.ColliderAdapter
 
         public override Bounds Bounds => collider.bounds;
 
-        private readonly Collider2D[] colliderBuffer = new Collider2D[10];        
+        private readonly Collider2D[] colliderBuffer = new Collider2D[10];
 
         protected override void Reset()
         {

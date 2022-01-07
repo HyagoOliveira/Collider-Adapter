@@ -13,7 +13,9 @@ namespace ActionCode.ColliderAdapter
         [SerializeField, Tooltip("Target layers to trigger collisions.")]
         private LayerMask targetLayers = 0;
         [SerializeField, Tooltip("Collider adapter used to calculate collisions in 2D or 3D.")]
-        private new AbstractColliderAdapter collider;
+#pragma warning disable CS0108 // Member hides inherited member; missing new keyword
+        private AbstractColliderAdapter collider;
+#pragma warning restore CS0108 // Member hides inherited member; missing new keyword
 
         /// <summary>
         /// Action fired on entering a trigger.

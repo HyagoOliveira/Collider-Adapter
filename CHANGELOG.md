@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Draw param to Cast functions
 
 ### Changed
+- Hides inherited member for collider fields
 - Improve Cast functions
 
 ## [1.0.1] - 2022-01-05

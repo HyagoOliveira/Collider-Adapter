@@ -9,7 +9,9 @@ namespace ActionCode.ColliderAdapter
     public class Collider3DAdapter : AbstractColliderAdapter
     {
         [SerializeField, Tooltip("The Collider component.")]
-        private new Collider collider = null;
+#pragma warning disable CS0108 // Member hides inherited member; missing new keyword
+        private Collider collider = null;
+#pragma warning restore CS0108 // Member hides inherited member; missing new keyword
 
         public override bool Enabled
         {
