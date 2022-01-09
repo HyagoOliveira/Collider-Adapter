@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Draw param to Cast functions
 
 ### Changed
+- Update Shapes package to 1.1.0
 - Hides inherited member for collider fields
 - Improve Cast functions
 

@@ -12,7 +12,7 @@
   "dependencies": {
     "com.unity.modules.physics": "1.0.0",
     "com.unity.modules.physics2d": "1.0.0",
-    "com.actioncode.shapes": "1.0.0"
+    "com.actioncode.shapes": "1.1.0"
   },
   "license": "MIT",
   "homepage": "https://bitbucket.org/nostgameteam/collider-adapter#readme",
