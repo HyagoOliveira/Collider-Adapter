@@ -5,7 +5,7 @@
 * Current version: **1.0.1**
 * License: **MIT**
 * Dependencies: 
-    - [com.actioncode.shapes : 1.1.0](https://bitbucket.org/nostgameteam/shapes/src/1.1.0/)
+    - [com.actioncode.shapes : 1.1.0](https://bitbucket.org/nostgameteam/shapes/src/1.2.0/)
 
 ## Summary
 
