@@ -93,6 +93,12 @@ namespace ActionCode.ColliderAdapter
                 circle.Cast(DEFAULT_OFFSET, direction, maxDistance, layerMask,
                     out collisionHit, minDepth, maxDepth, DEFAULT_SKIN, draw);
             }
+            else if (collider is CapsuleCollider2D capsule)
+            {
+                var angle = transform.eulerAngles.z;
+                capsule.Cast(DEFAULT_OFFSET, direction, maxDistance, layerMask,
+                    out collisionHit, angle, minDepth, maxDepth, DEFAULT_SKIN, draw);
+            }
 
             if (hasCollisions) hit = new RaycastHit2DAdapter(collisionHit);
             return hasCollisions;

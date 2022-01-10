@@ -56,6 +56,39 @@ namespace ActionCode.ColliderAdapter
         }
 
         /// <summary>
+        /// Draws a 2D CapsuleCast hit using the given params.
+        /// </summary>
+        /// <param name="hit"></param>
+        /// <param name="origin">The Raycast origin.</param>
+        /// <param name="rightDirection">The capsule right direction.</param>
+        /// <param name="rotation">The capsule rotation.</param>
+        /// <param name="capsuleDirection">The capsule axis direction.</param>
+        /// <param name="radius">The capsule radius.</param>
+        /// <param name="height">The capsule height.</param>
+        /// <param name="direction">The Raycast direction.</param>
+        /// <param name="distance">The Raycast distance.</param>
+        public static void DrawCapsuleCast(this RaycastHit2D hit, Vector2 origin, Vector2 rightDirection,
+            Quaternion rotation, CapsuleDirection2D capsuleDirection, float radius, float height,
+            Vector2 direction, float distance)
+        {
+            var end = origin + direction * distance;
+            var color = ExtensionConstants.COLLISION_OFF;
+            var horizontalCapsule = capsuleDirection == CapsuleDirection2D.Horizontal;
+            var axisDirection = horizontalCapsule ?
+                Vector3.right :
+                Vector3.up;
+
+            if (hit.collider)
+            {
+                color = ExtensionConstants.COLLISION_ON;
+                hit.point.Draw(color, ExtensionConstants.POINT_SIZE);
+            }
+
+            Debug.DrawLine(origin, end, color);
+            ShapeDebug.DrawCapsule(end, rightDirection, rotation, radius, height, axisDirection, color);
+        }
+
+        /// <summary>
         /// Draws a 2D CircleCast hit using the given params.
         /// </summary>
         /// <param name="hit"></param>

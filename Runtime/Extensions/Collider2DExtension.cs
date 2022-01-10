@@ -50,6 +50,54 @@ namespace ActionCode.ColliderAdapter
         }
 
         /// <summary>
+        /// Casts a capsule against Colliders in the Scene, 
+        /// gathering information about the first Collider to contact with.
+        /// </summary>
+        /// <param name="collider"></param>
+        /// <param name="filter">A set of parameters for filtering the cast results.</param>
+        /// <param name="hit">The cast information about the first detected object.</param>
+        /// <returns>Whether the capsule-cast hits any collider in the Scene.</returns>
+        public static bool Cast(this CapsuleCollider2D collider, CastFilter2D filter, out RaycastHit2D hit) =>
+            Cast(collider, filter.Offset, filter.Direction, filter.Distance, filter.Collisions,
+                out hit, filter.Angle, filter.MinDepth, filter.MaxDepth, filter.Skin, filter.Draw);
+
+        /// <summary>
+        /// Casts a capsule against Colliders in the Scene, 
+        /// gathering information about the first Collider to contact with.
+        /// </summary>
+        /// <param name="collider"></param>
+        /// <param name="offset"><inheritdoc cref="CastFilter2D.offset"/></param>
+        /// <param name="direction"><inheritdoc cref="CastFilter2D.direction"/></param>
+        /// <param name="distance"><inheritdoc cref="CastFilter2D.distance"/></param>
+        /// <param name="collisions"><inheritdoc cref="CastFilter2D.collisions"/></param>
+        /// <param name="hit">The cast information about the first detected object.</param>
+        /// <param name="angle"><inheritdoc cref="CastFilter2D.angle"/></param>
+        /// <param name="minDepth"><inheritdoc cref="CastFilter2D.minDepth"/></param>
+        /// <param name="maxDepth"><inheritdoc cref="CastFilter2D.maxDepth"/></param>
+        /// <param name="skin"><inheritdoc cref="CastFilter2D.skin"/></param>
+        /// <param name="draw"><inheritdoc cref="CastFilter2D.draw"/></param>
+        /// <returns>Whether the capsule-cast hits any collider in the Scene.</returns>
+        public static bool Cast(this CapsuleCollider2D collider,
+            Vector3 offset, Vector2 direction, float distance, int collisions,
+            out RaycastHit2D hit, float angle = 0f, float minDepth = 0f, float maxDepth = 0f,
+            float skin = 0f, bool draw = false)
+        {
+            var bounds = collider.bounds;
+            var origin = collider.transform.position + offset;
+            var size = bounds.size - Vector3.one * skin;
+
+            hit = Physics2D.CapsuleCast(origin, size, collider.direction, angle, direction, distance, collisions, minDepth, maxDepth);
+            if (draw)
+            {
+                var height = Mathf.Max(collider.size.x, collider.size.y);
+                var radius = 0.5f * Mathf.Min(collider.size.x, collider.size.y);
+                hit.DrawCapsuleCast(origin, collider.transform.right, collider.transform.rotation,
+                    collider.direction, radius, height, direction, distance);
+            }
+            return hit;
+        }
+
+        /// <summary>
         /// Casts a circle against Colliders in the Scene, 
         /// gathering information about the first Collider to contact with.
         /// </summary>
