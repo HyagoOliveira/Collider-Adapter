@@ -147,6 +147,11 @@ namespace ActionCode.ColliderAdapter
                 sphere.Cast(DEFAULT_OFFSET, direction, maxDistance, layerMask,
                     out collisionHit, DEFAULT_SKIN, draw);
             }
+            else if (collider is CapsuleCollider capsule)
+            {
+                capsule.Cast(DEFAULT_OFFSET, direction, maxDistance, layerMask,
+                    out collisionHit, DEFAULT_SKIN, draw);
+            }
 
             if (hasCollisions) hit = new RaycastHit3DAdapter(collisionHit);
             return hasCollisions;

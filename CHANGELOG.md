@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
+- Capsule Cast to 3D Adapter
+- Capsule Cast to 2D Adapter
 - Draw param to Cast functions
 
 ### Changed

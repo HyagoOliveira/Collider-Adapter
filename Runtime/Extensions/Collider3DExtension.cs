@@ -51,6 +51,60 @@ namespace ActionCode.ColliderAdapter
         }
 
         /// <summary>
+        /// Casts a capsule against Colliders in the Scene, 
+        /// gathering information about the first Collider to contact with.
+        /// </summary>
+        /// <param name="collider"></param>
+        /// <param name="filter">A set of parameters for filtering the cast results.</param>
+        /// <param name="hit">The cast information about the first detected object.</param>
+        /// <returns>Whether the capsule-cast hits any collider in the Scene.</returns>
+        public static bool Cast(this CapsuleCollider collider, CastFilter3D filter, out RaycastHit hit) =>
+            Cast(collider, filter.Offset, filter.Direction, filter.Distance,
+                filter.Collisions, out hit, filter.Skin, filter.Draw);
+
+        /// <summary>
+        /// Casts a capsule against Colliders in the Scene, 
+        /// gathering information about the first Collider to contact with.
+        /// </summary>
+        /// <param name="collider"></param>
+        /// <param name="offset"><inheritdoc cref="CastFilter3D.offset"/></param>
+        /// <param name="direction"><inheritdoc cref="CastFilter3D.direction"/></param>
+        /// <param name="distance"><inheritdoc cref="CastFilter3D.distance"/></param>
+        /// <param name="collisions"><inheritdoc cref="CastFilter3D.collisions"/></param>
+        /// <param name="hit">The cast information about the first detected object.</param>
+        /// <param name="skin"><inheritdoc cref="CastFilter3D.skin"/></param>
+        /// <param name="draw"><inheritdoc cref="CastFilter3D.draw"/></param>
+        /// <returns>Whether the capsule-cast hits any collider in the Scene.</returns>
+        public static bool Cast(this CapsuleCollider collider,
+            Vector3 offset, Vector3 direction,
+            float distance, int collisions, out RaycastHit hit,
+            float skin = 0f, bool draw = false)
+        {
+            var origin = collider.transform.position + offset;
+            var orientation = collider.transform.rotation;
+            var radius = collider.radius - skin;
+
+            var axisDirection = Vector3.zero;
+            if (collider.direction == 0) axisDirection = Vector3.right;
+            else if (collider.direction == 1) axisDirection = Vector3.up;
+            else if (collider.direction == 2) axisDirection = Vector3.forward;
+
+            var halfHeight = collider.height * 0.5F;
+            var axisDistance = axisDirection * (halfHeight - radius);
+            var point1 = origin + axisDistance;
+            var point2 = origin - axisDistance;
+            var wasHit = Physics.CapsuleCast(point1, point2, radius, direction, out hit, distance, collisions);
+
+            if (draw)
+            {
+                var diameter = radius * 2F;
+                hit.DrawCapsuleCast(origin, axisDistance, axisDirection,
+                    collider.transform.right, direction, orientation, distance, diameter);
+            }
+            return wasHit;
+        }
+
+        /// <summary>
         /// Casts a sphere against Colliders in the Scene, 
         /// gathering information about the first Collider to contact with.
         /// </summary>
