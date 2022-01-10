@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [1.1.0] - 2022-01-10
 ### Added
 - Capsule Cast to 3D Adapter
 - Capsule Cast to 2D Adapter
@@ -31,6 +33,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - README
 - Initial commit
 
-[Unreleased]: https://bitbucket.org/nostgameteam/[repo_url]/branches/compare/master%0D1.0.1
+[Unreleased]: https://bitbucket.org/nostgameteam/[repo_url]/branches/compare/master%0D1.1.0
+[1.1.0]: https://bitbucket.org/nostgameteam/[repo_url]/src/1.1.0/
 [1.0.1]: https://bitbucket.org/nostgameteam/[repo_url]/src/1.0.1/
 [1.0.0]: https://bitbucket.org/nostgameteam/[repo_url]/src/1.0.0/
