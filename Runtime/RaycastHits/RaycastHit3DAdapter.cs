@@ -17,7 +17,9 @@ namespace UnityEngine
 
         public Vector2 TextureCoord2 => raycastHit.textureCoord2;
 
+#if UNITY_2020_1_OR_NEWER
         public ArticulationBody ArticulationBody => raycastHit.articulationBody;
+#endif
 
         public Vector3 Point
         {

@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+- Inside RaycastHit3DAdapter, wrap ArticulationBody using 2020.1 directive
+
 ## [1.1.0] - 2022-01-10
 ### Added
 - Capsule Cast to 3D Adapter
