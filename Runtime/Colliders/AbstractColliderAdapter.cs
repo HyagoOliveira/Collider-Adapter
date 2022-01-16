@@ -8,6 +8,11 @@ namespace ActionCode.ColliderAdapter
     [DisallowMultipleComponent]
     public abstract class AbstractColliderAdapter : MonoBehaviour, ICollider
     {
+        public const int MAX_RAYS_COUNT = 64;
+        public const float DEFAULT_SKIN = 0F;
+        public static readonly Vector3 DEFAULT_OFFSET = Vector3.zero;
+        public static readonly Color CLOSEST_COLLISION = Color.yellow;
+
         public virtual bool Enabled
         {
             get => enabled;
@@ -25,11 +30,6 @@ namespace ActionCode.ColliderAdapter
         public abstract Vector3 Size { get; set; }
 
         public Vector3 HalfSize => Bounds.extents;
-
-        public const int MAX_RAYS_COUNT = 64;
-        public const float DEFAULT_SKIN = 0F;
-        public static readonly Vector3 DEFAULT_OFFSET = Vector3.zero;
-        public static readonly Color CLOSEST_COLLISION = Color.yellow;
 
         protected virtual void Reset() => FindCollider();
 
