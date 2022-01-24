@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Abstract3DColliderAdapter
 - BoxCollider3DAdapter
 - CapsuleCollider3DAdapter
+- SphereCollider3DAdapter
 
 ### Changed
 - Inside RaycastHit3DAdapter, wrap ArticulationBody using 2020.1 directive
