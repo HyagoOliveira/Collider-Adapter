@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - CapsuleCollider2DAdapter
 - CircleCollider2DAdapter
 - CompositeCollider2DAdapter
+- EdgeCollider2DAdapter
 - Abstract3DColliderAdapter
 - BoxCollider3DAdapter
 - CapsuleCollider3DAdapter
