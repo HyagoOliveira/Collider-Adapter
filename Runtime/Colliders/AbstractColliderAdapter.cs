@@ -3,7 +3,7 @@ using UnityEngine;
 namespace ActionCode.ColliderAdapter
 {
     /// <summary>
-    /// Abstract Adapter Component for 2D or 3D Colliders.
+    /// Abstract Adapter Component for Colliders.
     /// </summary>
     [DisallowMultipleComponent]
     public abstract class AbstractColliderAdapter : MonoBehaviour, ICollider
@@ -113,35 +113,10 @@ namespace ActionCode.ColliderAdapter
         /// Displays a message for the user to choose which Collider component to use.
         /// <para><b>This function should only be used on Editor time</b>, like MonoBehaviour.Reset()</para>
         /// </summary>
+        /// <param name="gameObject">A GameObject to add a ColliderAdapter implementation.</param>
         /// <returns>An implementation of <see cref="AbstractColliderAdapter"/>.</returns>
-        public static AbstractColliderAdapter ResolveCollider(GameObject gameObject)
-        {
-            var collider = gameObject.GetComponent<AbstractColliderAdapter>();
-            if (collider == null)
-            {
-                var hasBoxCollider = gameObject.TryGetComponent(out BoxCollider _);
-                var hasBoxCollider2D = gameObject.TryGetComponent(out BoxCollider2D _);
-
-                if (hasBoxCollider) collider = gameObject.AddComponent<Collider3DAdapter>();
-                else if (hasBoxCollider2D) collider = gameObject.AddComponent<Collider2DAdapter>();
-            }
-
-#if UNITY_EDITOR
-            if (CanDisplayEditorDialog() && collider == null)
-            {
-                const string title = "Adding required Collider";
-                const string message = "You need a Collider component.\nChoose one of the following options:";
-                bool use2D = UnityEditor.EditorUtility.DisplayDialog(title, message, "Use for 2D", "Use for 3D");
-
-                // Cannot use conditional expression here (collider = use2D ? ... : ...;)
-                if (use2D) collider = gameObject.AddComponent<Collider2DAdapter>();
-                else collider = gameObject.AddComponent<Collider3DAdapter>();
-            }
-#endif
-            return collider;
-        }
-
-        protected static bool CanDisplayEditorDialog() => Application.isEditor && !Application.isBatchMode;
+        public static AbstractColliderAdapter ResolveCollider(GameObject gameObject) =>
+            ColliderAdapterFactory.GetAdapter(gameObject);
         #endregion
     }
 }
