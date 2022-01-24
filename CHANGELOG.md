@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+- Extensions for CapsuleCollider
+
 ### Changed
 - Inside RaycastHit3DAdapter, wrap ArticulationBody using 2020.1 directive
 

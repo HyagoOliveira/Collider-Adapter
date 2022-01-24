@@ -276,6 +276,84 @@ namespace ActionCode.ColliderAdapter
         }
         #endregion
 
+        #region CapsuleCollider
+        /// <summary>
+        /// Checks whether overlapping other colliders.
+        /// </summary>
+        /// <param name="collider"></param>
+        /// <param name="mask">Filter to detect Colliders only on certain layers.</param>
+        /// <param name="interaction">Should it hit Triggers?</param>
+        /// <returns>True if overlapping other colliders. False otherwise.</returns>
+        public static bool IsOverlapping(this CapsuleCollider collider, int mask,
+            QueryTriggerInteraction interaction = QueryTriggerInteraction.UseGlobal)
+        {
+            (Vector3 point0, Vector3 point1) = GetPoints(collider);
+
+            var wasEnabled = collider.enabled;
+            collider.enabled = false; // disabling so it doesn't collide with itself.
+            var wasHit = Physics.CheckCapsule(point0, point1, collider.radius, mask, interaction);
+            collider.enabled = wasEnabled;
+
+            return wasHit;
+        }
+
+        /// <summary>
+        /// Checks whether overlapping other collider and store it into the given colliding param.
+        /// </summary>
+        /// <param name="collider"></param>
+        /// <param name="mask">Filter to detect Colliders only on certain layers.</param>
+        /// <param name="colliding">The output argument that will contain the collider or null if not colliding.</param>
+        /// <param name="interaction">Should it hit Triggers?</param>
+        /// <returns>True if overlapping other collider. False otherwise.</returns>
+        public static bool IsOverlapping(this CapsuleCollider collider, int mask, out Collider colliding,
+            QueryTriggerInteraction interaction = QueryTriggerInteraction.UseGlobal)
+        {
+            (Vector3 point0, Vector3 point1) = GetPoints(collider);
+
+            var wasEnabled = collider.enabled;
+            collider.enabled = false; // disabling so it doesn't collide with itself.
+            int totalHits = Physics.OverlapCapsuleNonAlloc(point0, point1, collider.radius, buffer, mask, interaction);
+            collider.enabled = wasEnabled;
+
+            var wasHit = totalHits > 0;
+            colliding = wasHit ? buffer[0] : null;
+
+            return wasHit;
+        }
+
+        /// <summary>
+        /// Finds all overlapping colliders and store them into the given colliders buffer.
+        /// </summary>
+        /// <param name="collider"></param>
+        /// <param name="mask">Filter to detect Colliders only on certain layers.</param>
+        /// <param name="colliders">The colliders buffer to store the results in.</param>
+        /// <param name="interaction">Should it hit Triggers?</param>
+        /// <returns>The amount of colliders stored in colliders buffer.</returns>
+        public static int IsOverlapping(this CapsuleCollider collider, int mask, Collider[] colliders,
+            QueryTriggerInteraction interaction = QueryTriggerInteraction.UseGlobal)
+        {
+            (Vector3 point0, Vector3 point1) = GetPoints(collider);
+
+            var wasEnabled = collider.enabled;
+            collider.enabled = false; // disabling so it doesn't collide with itself.
+            int totalHits = Physics.OverlapCapsuleNonAlloc(point0, point1, collider.radius, colliders, mask, interaction);
+            collider.enabled = wasEnabled;
+
+            return totalHits;
+        }
+
+        public static (Vector3, Vector3) GetPoints(this CapsuleCollider collider)
+        {
+            var direction = new Vector3 { [collider.direction] = 1 };
+            var offset = collider.height * 0.5F - collider.radius;
+            var localPoint0 = collider.center - direction * offset;
+            var localPoint1 = collider.center + direction * offset;
+            var point0 = collider.transform.TransformPoint(localPoint0);
+            var point1 = collider.transform.TransformPoint(localPoint1);
+            return (point0, point1);
+        }
+        #endregion
+
         #endregion
     }
 }
