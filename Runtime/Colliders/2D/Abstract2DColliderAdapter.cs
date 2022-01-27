@@ -85,13 +85,17 @@ namespace ActionCode.ColliderAdapter
 
         public override Vector3 ClosestPoint(Vector3 position) => collider.ClosestPoint(position);
 
-        public override bool IsColliding(int layerMask) => collider.IsTouchingLayers(layerMask);
+        public override bool IsColliding(int layerMask)
+        {
+            var hits = collider.OverlapCollider(CreateFilter(layerMask), buffer);
+            var hasHits = hits > 0;
+            return hasHits;
+        }
 
         public override bool TryToGetCollidingComponent<T>(int layerMask, out T component)
         {
-            var results = collider.OverlapCollider(CreateFilter(layerMask), buffer);
-            var hasResults = results > 0;
-            if (hasResults) return buffer[0].TryGetComponent(out component);
+            var isColliding = IsColliding(layerMask);
+            if (isColliding) return buffer[0].TryGetComponent(out component);
 
             component = default;
             return false;
