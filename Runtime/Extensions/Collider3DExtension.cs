@@ -342,6 +342,11 @@ namespace ActionCode.ColliderAdapter
             return totalHits;
         }
 
+        /// <summary>
+        /// Gets the two points representing the capsule spheres at its ends. 
+        /// </summary>
+        /// <param name="collider"></param>
+        /// <returns>A Vector3 tuple representing the capsule spheres.</returns>
         public static (Vector3, Vector3) GetPoints(this CapsuleCollider collider)
         {
             var direction = new Vector3 { [collider.direction] = 1 };
