@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.0.0] - 2022-03-19
 ### Added
 - Extensions for CapsuleCollider
 - Abstract2DColliderAdapter
@@ -55,6 +56,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Initial commit
 
 [Unreleased]: https://github.com/HyagoOliveira/Collider-Adapter/compare/2.0.0...main
+[2.0.0]: https://github.com/HyagoOliveira/Collider-Adapter/tree/2.0.0
 [1.1.0]: https://github.com/HyagoOliveira/Collider-Adapter/tree/1.1.0
 [1.0.1]: https://github.com/HyagoOliveira/Collider-Adapter/tree/1.0.1
 [1.0.0]: https://github.com/HyagoOliveira/Collider-Adapter/tree/1.0.0
