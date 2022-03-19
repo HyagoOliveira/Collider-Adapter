@@ -67,16 +67,19 @@ will be available for you to install using the **Package Manager** windows.
 
 You will need a **Git client** installed on your computer with the Path variable already set. 
 
-Use the **Package Manager** "Add package from git URL..." feature or add manually this line inside `dependencies` attribute: 
+- Use the **Package Manager** "Add package from git URL..." feature and paste this URL: `https://github.com/HyagoOliveira/Collider-Adapter.git`
+
+- You can also manually modify you `Packages/manifest.json` file and add this line inside `dependencies` attribute: 
 
 ```json
-"com.actioncode.collider-adapter":"https://bitbucket.org/nostgameteam/collider-adapter.git"
+"com.actioncode.collider-adapter":"https://github.com/HyagoOliveira/Collider-Adapter.git"
 ```
 
 ---
 
 **Hyago Oliveira**
 
+[GitHub](https://github.com/HyagoOliveira) -
 [BitBucket](https://bitbucket.org/HyagoGow/) -
 [LinkedIn](https://www.linkedin.com/in/hyago-oliveira/) -
 <hyagogow@gmail.com>
