@@ -26,6 +26,6 @@ namespace ActionCode.ColliderAdapter
                     out collisionHit, DEFAULT_SKIN, draw);
 
         protected override int InternalOverlap(int layerMask) =>
-            Physics.OverlapSphereNonAlloc(Center, Radius, buffer, layerMask);
+            Physics.OverlapSphereNonAlloc(Center, Radius * GetBiggestSizeAxis(), buffer, layerMask);
     }
 }

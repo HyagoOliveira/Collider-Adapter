@@ -106,5 +106,11 @@ namespace ActionCode.ColliderAdapter
         bool Raycasts(Vector3 point1, Vector3 point2, Vector3 direction,
             out IRaycastHit closestHit, float distance, int mask,
             float angleLimit = 0F, int raysCount = 2, bool draw = false);
+
+        /// <summary>
+        /// Returns the biggest axis of <see cref="Size"/>.
+        /// </summary>
+        /// <returns>The biggest X, Y or Z on <see cref="Size"/>.</returns>
+        float GetBiggestSizeAxis();
     }
 }

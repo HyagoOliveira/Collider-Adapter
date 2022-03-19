@@ -100,6 +100,12 @@ namespace ActionCode.ColliderAdapter
         /// <returns>True if overlapping with the bounds. False otherwise.</returns>
         public bool IsOverlapping(Bounds bounds) => Bounds.Contains(bounds.min) || Bounds.Contains(bounds.max);
 
+        public float GetBiggestSizeAxis()
+        {
+            float maxBetweenXOrY = Mathf.Max(Size.x, Size.y);
+            return Mathf.Max(maxBetweenXOrY, Size.z);
+        }
+
         protected static bool IsAllowedAngle(Vector3 normal, float limit)
         {
             var angle = Vector3.Angle(normal, Vector3.up);
