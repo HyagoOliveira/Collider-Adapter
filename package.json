@@ -15,13 +15,13 @@
     "com.actioncode.shapes": "1.2.0"
   },
   "license": "MIT",
-  "homepage": "https://bitbucket.org/nostgameteam/collider-adapter#readme",
+  "homepage": "https://github.com/HyagoOliveira/Collider-Adapter#readme",
   "repository": {
     "type": "git",
-    "url": "https://bitbucket.org/nostgameteam/collider-adapter.git"
+    "url": "https://github.com/HyagoOliveira/Collider-Adapter.git"
   },
-  "documentationUrl": "https://bitbucket.org/nostgameteam/collider-adapter#readme",
-  "changelogUrl": "https://bitbucket.org/nostgameteam/collider-adapter/CHANGELOG.md",
+  "documentationUrl": "https://github.com/HyagoOliveira/Collider-Adapter#readme",
+  "changelogUrl": "https://github.com/HyagoOliveira/Collider-Adapter/CHANGELOG.md",
   "author": {
     "name": "Hyago Oliveira",
     "email": "hyagogow@gmail.com"
