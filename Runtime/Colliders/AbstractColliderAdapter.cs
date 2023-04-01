@@ -59,7 +59,7 @@ namespace ActionCode.ColliderAdapter
 
         public virtual bool Raycasts(Vector3 point1, Vector3 point2, Vector3 direction,
             out IRaycastHit closestHit, float distance, int mask,
-            float angleLimit = 0f, int raysCount = 2, bool draw = false)
+            int raysCount = 2, bool draw = false)
         {
             closestHit = default;
             raysCount = Mathf.Min(raysCount, MAX_RAYS_COUNT);
@@ -74,7 +74,7 @@ namespace ActionCode.ColliderAdapter
                 var wasHit = Raycast(origin, direction, out IRaycastHit hit, distance, mask, draw);
                 var isClosestHit = wasHit && hit.Distance < closestDistance;
 
-                if (isClosestHit && IsAllowedAngle(hit.Normal, angleLimit))
+                if (isClosestHit)
                 {
                     closestDistance = hit.Distance;
                     closestHit = hit;
@@ -104,12 +104,6 @@ namespace ActionCode.ColliderAdapter
         {
             float maxBetweenXOrY = Mathf.Max(Size.x, Size.y);
             return Mathf.Max(maxBetweenXOrY, Size.z);
-        }
-
-        protected static bool IsAllowedAngle(Vector3 normal, float limit)
-        {
-            var angle = Vector3.Angle(normal, Vector3.up);
-            return angle > limit || Mathf.Approximately(angle, limit);
         }
 
         #region Editor

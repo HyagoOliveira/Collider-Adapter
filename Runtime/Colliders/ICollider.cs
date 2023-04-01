@@ -96,16 +96,12 @@ namespace ActionCode.ColliderAdapter
         /// <param name="closestHit">The cast information about the closest detected Collider.</param>
         /// <param name="distance">The maximum distance to cast the rays.</param>
         /// <param name="mask">Filter to detect Colliders only on certain layers.</param>
-        /// <param name="angleLimit">
-        /// The angle (in degrees) to detect collisions on hits above this angle. 
-        /// <para>Leave it on 0F if you don't want to use it.</para>
-        /// </param>
         /// <param name="raysCount">The number of rays to cast.</param>
         /// <param name="draw">Draws the raycasts if enabled.</param>
         /// <returns>Whether the raycasts hit any Collider along the given points.</returns>
         bool Raycasts(Vector3 point1, Vector3 point2, Vector3 direction,
             out IRaycastHit closestHit, float distance, int mask,
-            float angleLimit = 0F, int raysCount = 2, bool draw = false);
+            int raysCount = 2, bool draw = false);
 
         /// <summary>
         /// Returns the biggest axis of <see cref="Size"/>.

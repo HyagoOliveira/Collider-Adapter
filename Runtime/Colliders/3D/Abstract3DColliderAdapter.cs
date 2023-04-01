@@ -56,7 +56,7 @@ namespace ActionCode.ColliderAdapter
 
         public override bool Raycasts(Vector3 point1, Vector3 point2, Vector3 direction,
             out IRaycastHit closestHit, float distance, int mask,
-            float angleLimit = 0f, int raysCount = 2, bool draw = false)
+            int raysCount = 2, bool draw = false)
         {
             const float skin = 0.0001F;
 
@@ -80,7 +80,7 @@ namespace ActionCode.ColliderAdapter
                 var wasHit = Raycast(origin, direction, out IRaycastHit hit, distance, mask, draw);
                 var isClosestHit = wasHit && hit.Distance < closestDistance;
 
-                if (isClosestHit && IsAllowedAngle(hit.Normal, angleLimit))
+                if (isClosestHit)
                 {
                     closestDistance = hit.Distance;
                     closestHit = hit;
@@ -94,7 +94,7 @@ namespace ActionCode.ColliderAdapter
                 var wasHit = Raycast(origin, direction, out IRaycastHit hit, distance, mask, draw);
                 var isClosestHit = wasHit && hit.Distance < closestDistance;
 
-                if (isClosestHit && IsAllowedAngle(hit.Normal, angleLimit))
+                if (isClosestHit)
                 {
                     closestDistance = hit.Distance;
                     closestHit = hit;
@@ -110,7 +110,7 @@ namespace ActionCode.ColliderAdapter
                 var wasHit = Raycast(origin, direction, out IRaycastHit hit, distance, mask, draw);
                 var isClosestHit = wasHit && hit.Distance < closestDistance;
 
-                if (isClosestHit && IsAllowedAngle(hit.Normal, angleLimit))
+                if (isClosestHit)
                 {
                     closestDistance = hit.Distance;
                     closestHit = hit;
