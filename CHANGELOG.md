@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [3.0.0] - 2023-04-03
 ### Removed
 - Check for Angle Limit
 
@@ -57,7 +59,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - README
 - Initial commit
 
-[Unreleased]: https://github.com/HyagoOliveira/Collider-Adapter/compare/2.0.0...main
+[Unreleased]: https://github.com/HyagoOliveira/Collider-Adapter/compare/3.0.0...main
+[3.0.0]: https://github.com/HyagoOliveira/Collider-Adapter/tree/3.0.0
 [2.0.0]: https://github.com/HyagoOliveira/Collider-Adapter/tree/2.0.0
 [1.1.0]: https://github.com/HyagoOliveira/Collider-Adapter/tree/1.1.0
 [1.0.1]: https://github.com/HyagoOliveira/Collider-Adapter/tree/1.0.1
