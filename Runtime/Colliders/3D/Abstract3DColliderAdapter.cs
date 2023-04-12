@@ -40,6 +40,8 @@ namespace ActionCode.ColliderAdapter
 
         protected readonly Collider[] buffer = new Collider[10];
 
+        public override void SyncTransforms() => Physics.SyncTransforms();
+
         protected abstract bool InternalCast(Vector3 direction, float maxDistance, int layerMask,
             out RaycastHit collisionHit, bool draw);
 

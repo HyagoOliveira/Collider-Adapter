@@ -48,6 +48,11 @@ namespace ActionCode.ColliderAdapter
         Vector3 ClosestPoint(Vector3 position);
 
         /// <summary>
+        /// Apply Transform changes to the physics engine.
+        /// </summary>
+        void SyncTransforms();
+
+        /// <summary>
         /// Checks if colliding based on the given layerMask.
         /// </summary>
         /// <param name="layerMask">Filter to check objects only on specific layers.</param>

@@ -63,6 +63,8 @@ namespace ActionCode.ColliderAdapter
             CheckQueriesStartingInColliders();
         }
 
+        public override void SyncTransforms() => Physics2D.SyncTransforms();
+
         protected abstract bool InternalCast(Vector3 direction, float maxDistance, int layerMask,
             out RaycastHit2D collisionHit, bool draw);
 

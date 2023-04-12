@@ -33,6 +33,8 @@ namespace ActionCode.ColliderAdapter
 
         protected virtual void Reset() => FindCollider();
 
+        public abstract void SyncTransforms();
+
         public abstract Vector3 ClosestPoint(Vector3 position);
 
         public abstract bool IsColliding(int layerMask);
