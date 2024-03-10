@@ -116,19 +116,19 @@ namespace ActionCode.ColliderAdapter
         }
 
         /// <summary>
-        /// Checks if the given position is overlapping any 2D Collider.
+        /// Checks if the given point is overlapping any 2D Collider.
         /// <para>
         /// Your collider should be used by a Composite Collider with a GeometryType 
         /// set to <see cref="CompositeCollider2D.GeometryType.Polygons"/>
         /// </para>
         /// </summary>
-        /// <param name="position">Position to check.</param>
+        /// <param name="point">Position to check.</param>
         /// <param name="mask">Layer mask to filter.</param>
         /// <param name="draw">Should draw the collision?</param>
         /// <returns>Whether is colliding.</returns>
-        public static bool IsOverlapingPoint(Vector2 position, int mask, bool draw = false)
+        public override bool IsOverlapingPoint(Vector3 point, int mask, bool draw = false)
         {
-            var collider = Physics2D.OverlapPoint(position, mask);
+            var collider = Physics2D.OverlapPoint(point, mask);
             var isCollision = collider && !collider.isTrigger;
 
             if (draw)
@@ -136,7 +136,7 @@ namespace ActionCode.ColliderAdapter
                 var color = isCollision ?
                     ExtensionConstants.COLLISION_ON :
                     ExtensionConstants.COLLISION_OFF;
-                position.Draw(color);
+                point.Draw(color);
             }
             return isCollision;
         }

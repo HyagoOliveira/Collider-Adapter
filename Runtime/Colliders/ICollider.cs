@@ -126,5 +126,14 @@ namespace ActionCode.ColliderAdapter
         /// <param name="draw">Draws the raycast if enabled.</param>
         /// <returns>Whether the Raycast hits any collider in the Scene.</returns>
         bool Raycast(Vector3 origin, Vector3 direction, out IRaycastHit closestHit, float distance, int mask, bool draw = false);
+
+        /// <summary>
+        /// Checks if the given point is overlapping any Collider.
+        /// </summary>
+        /// <param name="point">Position to check.</param>
+        /// <param name="mask">Layer mask to filter.</param>
+        /// <param name="draw">Should draw the collision?</param>
+        /// <returns>Whether is colliding.</returns>
+        bool IsOverlapingPoint(Vector3 point, int mask, bool draw = false);
     }
 }

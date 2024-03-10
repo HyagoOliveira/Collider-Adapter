@@ -156,6 +156,21 @@ namespace ActionCode.ColliderAdapter
             return size;
         }
 
+        public override bool IsOverlapingPoint(Vector3 point, int mask, bool draw = false)
+        {
+            var colliders = Physics.OverlapSphere(point, radius: 0.01f, mask);
+            var isCollision = colliders.Length > 0 && !colliders[0].isTrigger;
+
+            if (draw)
+            {
+                var color = isCollision ?
+                    ExtensionConstants.COLLISION_ON :
+                    ExtensionConstants.COLLISION_OFF;
+                point.Draw(color);
+            }
+            return isCollision;
+        }
+
         #region Editor
         protected override void FindCollider() => collider = GetComponent<C>();
         #endregion

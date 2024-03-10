@@ -40,6 +40,7 @@ namespace ActionCode.ColliderAdapter
         public abstract int TryToGetCollidingComponents<T>(int layerMask, T[] components);
         public abstract bool TryToGetCollidingComponent<T>(int layerMask, out T component);
         public abstract bool IsColliding(int layerMask);
+        public abstract bool IsOverlapingPoint(Vector3 point, int mask, bool draw = false);
         public abstract bool Cast(Vector3 direction, out IRaycastHit hit, float maxDistance, int layerMask, bool draw = false);
         public abstract bool Raycast(Vector3 origin, Vector3 direction, out IRaycastHit closestHit, float distance, int mask, bool draw = false);
 
