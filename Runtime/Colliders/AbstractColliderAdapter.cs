@@ -37,27 +37,11 @@ namespace ActionCode.ColliderAdapter
 
         public abstract Vector3 ClosestPoint(Vector3 position);
 
-        public abstract bool IsColliding(int layerMask);
-
-        public abstract bool TryToGetCollidingComponent<T>(int layerMask, out T component);
-
         public abstract int TryToGetCollidingComponents<T>(int layerMask, T[] components);
-
+        public abstract bool TryToGetCollidingComponent<T>(int layerMask, out T component);
+        public abstract bool IsColliding(int layerMask);
         public abstract bool Cast(Vector3 direction, out IRaycastHit hit, float maxDistance, int layerMask, bool draw = false);
-
-        /// <summary>
-        /// Casts a Ray against Colliders in the Scene, gathering 
-        /// information about the first Collider to contact with.
-        /// </summary>
-        /// <param name="origin">The Raycast origin.</param>
-        /// <param name="direction">The Raycast direction.</param>
-        /// <param name="closestHit">The cast information about the first detected object.</param>
-        /// <param name="distance">The Raycast distance.</param>
-        /// <param name="mask">Filter to detect Colliders only on certain layers.</param>
-        /// <param name="draw">Draws the raycast if enabled.</param>
-        /// <returns>Whether the Raycast hits any collider in the Scene.</returns>
-        public abstract bool Raycast(Vector3 origin, Vector3 direction, out IRaycastHit closestHit,
-            float distance, int mask, bool draw = false);
+        public abstract bool Raycast(Vector3 origin, Vector3 direction, out IRaycastHit closestHit, float distance, int mask, bool draw = false);
 
         public virtual bool Raycasts(Vector3 point1, Vector3 point2, Vector3 direction,
             out IRaycastHit closestHit, float distance, int mask,

@@ -113,5 +113,18 @@ namespace ActionCode.ColliderAdapter
         /// </summary>
         /// <returns>The biggest X, Y or Z on <see cref="Size"/>.</returns>
         float GetBiggestSizeAxis();
+
+        /// <summary>
+        /// Casts a Ray against Colliders in the Scene, gathering 
+        /// information about the first Collider to contact with.
+        /// </summary>
+        /// <param name="origin">The Raycast origin.</param>
+        /// <param name="direction">The Raycast direction.</param>
+        /// <param name="closestHit">The cast information about the first detected object.</param>
+        /// <param name="distance">The Raycast distance.</param>
+        /// <param name="mask">Filter to detect Colliders only on certain layers.</param>
+        /// <param name="draw">Draws the raycast if enabled.</param>
+        /// <returns>Whether the Raycast hits any collider in the Scene.</returns>
+        bool Raycast(Vector3 origin, Vector3 direction, out IRaycastHit closestHit, float distance, int mask, bool draw = false);
     }
 }
