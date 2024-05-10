@@ -115,6 +115,13 @@ namespace ActionCode.ColliderAdapter
             return size;
         }
 
+        public override bool TryGetOverlapingComponent<T>(Vector3 point, int layerMask, out T component, bool draw = false)
+        {
+            component = default;
+            var hasCollider = TryGetOverlapingCollider(point, layerMask, out Collider2D collider, draw);
+            return hasCollider && collider.TryGetComponent(out component);
+        }
+
         /// <summary>
         /// Checks if the given point is overlapping any 2D Collider.
         /// <para>
@@ -126,9 +133,24 @@ namespace ActionCode.ColliderAdapter
         /// <param name="mask">Layer mask to filter.</param>
         /// <param name="draw">Should draw the collision?</param>
         /// <returns>Whether is colliding.</returns>
-        public override bool IsOverlapingPoint(Vector3 point, int mask, bool draw = false)
+        public override bool IsOverlapingPoint(Vector3 point, int mask, bool draw = false) =>
+            TryGetOverlapingCollider(point, mask, out Collider2D _, draw);
+
+        /// <summary>
+        /// Tries to get any overlapping 2D Collider using the given point and mask.
+        /// <para>
+        /// Your collider should be used by a Composite Collider with a GeometryType 
+        /// set to <see cref="CompositeCollider2D.GeometryType.Polygons"/>
+        /// </para>
+        /// </summary>
+        /// <param name="point">Position to check.</param>
+        /// <param name="mask">Layer mask to filter.</param>
+        /// <param name="collider">The overlapping collider if any.</param>
+        /// <param name="draw">Should draw the collision?</param>
+        /// <returns>Whether the given point is overlapping the Collider.</returns>
+        public bool TryGetOverlapingCollider(Vector3 point, int mask, out Collider2D collider, bool draw = false)
         {
-            var collider = Physics2D.OverlapPoint(point, mask);
+            collider = Physics2D.OverlapPoint(point, mask);
             var isCollision = collider && !collider.isTrigger;
 
             if (draw)

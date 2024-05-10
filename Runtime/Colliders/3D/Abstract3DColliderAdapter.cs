@@ -156,10 +156,30 @@ namespace ActionCode.ColliderAdapter
             return size;
         }
 
-        public override bool IsOverlapingPoint(Vector3 point, int mask, bool draw = false)
+        public override bool TryGetOverlapingComponent<T>(Vector3 point, int layerMask, out T component, bool draw = false)
+        {
+            component = default;
+            var hasCollider = TryGetOverlapingCollider(point, layerMask, out Collider collider, draw);
+            return hasCollider && collider.TryGetComponent(out component);
+        }
+
+        public override bool IsOverlapingPoint(Vector3 point, int mask, bool draw = false) =>
+            TryGetOverlapingCollider(point, mask, out Collider _, draw);
+
+        /// <summary>
+        /// Tries to get any overlapping 3D Collider using the given point and mask.
+        /// </summary>
+        /// <param name="point">Position to check.</param>
+        /// <param name="mask">Layer mask to filter.</param>
+        /// <param name="collider">The overlapping collider if any.</param>
+        /// <param name="draw">Should draw the collision?</param>
+        /// <returns>Whether the given point is overlapping the Collider.</returns>
+        public bool TryGetOverlapingCollider(Vector3 point, int mask, out Collider collider, bool draw = false)
         {
             var colliders = Physics.OverlapSphere(point, radius: 0.01f, mask);
             var isCollision = colliders.Length > 0 && !colliders[0].isTrigger;
+
+            collider = isCollision ? colliders[0] : default;
 
             if (draw)
             {
