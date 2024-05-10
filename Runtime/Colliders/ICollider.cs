@@ -77,7 +77,7 @@ namespace ActionCode.ColliderAdapter
         /// <param name="component">The output argument that will contain the component or default one.</param>
         /// <param name="draw">Should draw the collision?</param>
         /// <returns>Whether the given point is overlapping the required Component.</returns>
-        bool TryGetOverlapingComponent<T>(Vector3 point, int layerMask, out T component, bool draw = false) where T : Component;
+        bool TryGetOverlapingComponent<T>(Vector3 point, int layerMask, out T component, bool draw = false);
 
         /// <summary>
         /// Checks if colliding with any Component using the given type and layerMask.
