@@ -94,7 +94,7 @@ namespace ActionCode.ColliderAdapter
             return hasHits;
         }
 
-        public override bool TryToGetCollidingComponent<T>(int layerMask, out T component)
+        public override bool TryGetCollidingComponent<T>(int layerMask, out T component)
         {
             var isColliding = IsColliding(layerMask);
             if (isColliding) return buffer[0].TryGetComponent(out component);
@@ -103,7 +103,7 @@ namespace ActionCode.ColliderAdapter
             return false;
         }
 
-        public override int TryToGetCollidingComponents<T>(int layerMask, T[] components)
+        public override int TryGetCollidingComponents<T>(int layerMask, T[] components)
         {
             var results = collider.OverlapCollider(CreateFilter(layerMask), buffer);
             var size = Mathf.Min(results, components.Length);

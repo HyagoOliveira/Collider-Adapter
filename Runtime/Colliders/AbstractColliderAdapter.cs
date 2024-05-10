@@ -37,8 +37,8 @@ namespace ActionCode.ColliderAdapter
 
         public abstract Vector3 ClosestPoint(Vector3 position);
 
-        public abstract int TryToGetCollidingComponents<T>(int layerMask, T[] components);
-        public abstract bool TryToGetCollidingComponent<T>(int layerMask, out T component);
+        public abstract int TryGetCollidingComponents<T>(int layerMask, T[] components);
+        public abstract bool TryGetCollidingComponent<T>(int layerMask, out T component);
         public abstract bool TryGetOverlapingComponent<T>(Vector3 point, int layerMask, out T component, bool draw = false) where T : Component;
         public abstract bool IsColliding(int layerMask);
         public abstract bool IsOverlapingPoint(Vector3 point, int mask, bool draw = false);

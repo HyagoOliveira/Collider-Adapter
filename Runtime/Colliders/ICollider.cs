@@ -66,7 +66,7 @@ namespace ActionCode.ColliderAdapter
         /// <param name="layerMask">Filter to check objects only on specific layers.</param>
         /// <param name="component">The output argument that will contain the component or default one.</param>
         /// <returns>Whether was a collision.</returns>
-        bool TryToGetCollidingComponent<T>(int layerMask, out T component);
+        bool TryGetCollidingComponent<T>(int layerMask, out T component);
 
         /// <summary>
         /// Checks if the given point is overlapping any Component.
@@ -86,7 +86,7 @@ namespace ActionCode.ColliderAdapter
         /// <param name="layerMask">Filter to check objects only on specific layers.</param>
         /// <param name="components">The buffer to store the components in.</param>
         /// <returns>The amount of components stored in the buffer.</returns>
-        int TryToGetCollidingComponents<T>(int layerMask, T[] components);
+        int TryGetCollidingComponents<T>(int layerMask, T[] components);
 
         /// <summary>
         /// Casts this Collider against other Colliders in the Scene, 
