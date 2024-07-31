@@ -94,6 +94,20 @@ namespace ActionCode.ColliderAdapter
             return Mathf.Max(maxBetweenXOrY, Size.z);
         }
 
+        public Bounds GetIntersection(AbstractColliderAdapter collider) => GetIntersection(collider.Bounds);
+
+        public Bounds GetIntersection(Bounds bounds)
+        {
+            var intersection = new Bounds();
+
+            intersection.SetMinMax(
+                Vector3.Max(Bounds.min, bounds.min),
+                Vector3.Min(Bounds.max, bounds.max)
+            );
+
+            return intersection;
+        }
+
         #region Editor
         protected abstract void FindCollider();
 

@@ -146,5 +146,21 @@ namespace ActionCode.ColliderAdapter
         /// <param name="draw">Should draw the collision?</param>
         /// <returns>Whether is colliding.</returns>
         bool IsOverlapingPoint(Vector3 point, int mask, bool draw = false);
+
+        /// <summary>
+        /// Returns the intersection bounds between this collider and the given one.
+        /// <para>An empty bounds will be returned if no intersection happens.</para>
+        /// </summary>
+        /// <param name="collider"></param>
+        /// <returns>Always a Bounds instance.</returns>
+        Bounds GetIntersection(AbstractColliderAdapter collider);
+
+        /// <summary>
+        /// Returns the intersection bounds between this collider and the given bounds.
+        /// <para>An empty bounds will be returned if no intersection happens.</para>
+        /// </summary>
+        /// <param name="bounds"></param>
+        /// <returns>Always a Bounds instance.</returns>
+        Bounds GetIntersection(Bounds bounds);
     }
 }
