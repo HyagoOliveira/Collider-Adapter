@@ -2,7 +2,7 @@
 
 * Abstract adapter classes for 2D and 3D Colliders.
 * Unity minimum version: **2023.3**
-* Current version: **3.4.0**
+* Current version: **3.5.0**
 * License: **MIT**
 * Dependencies: 
     - [com.actioncode.shapes : 1.2.0](https://github.com/HyagoOliveira/Shapes/tree/1.2.0/)
