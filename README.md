@@ -1,7 +1,7 @@
 # Collider Adapter
 
 * Abstract adapter classes for 2D and 3D Colliders.
-* Unity minimum version: **2019.3**
+* Unity minimum version: **2023.3**
 * Current version: **3.4.0**
 * License: **MIT**
 * Dependencies: 
