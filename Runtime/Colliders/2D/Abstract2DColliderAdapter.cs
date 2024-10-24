@@ -169,6 +169,7 @@ namespace ActionCode.ColliderAdapter
             {
                 useLayerMask = true,
                 useDepth = true,
+                useTriggers = true,
 
                 layerMask = layerMask,
                 minDepth = minDepth,
