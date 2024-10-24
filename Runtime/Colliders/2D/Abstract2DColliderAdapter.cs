@@ -89,7 +89,7 @@ namespace ActionCode.ColliderAdapter
 
         public override bool IsColliding(int layerMask)
         {
-            var hits = collider.OverlapCollider(CreateFilter(layerMask), buffer);
+            var hits = collider.Overlap(CreateFilter(layerMask), buffer);
             var hasHits = hits > 0;
             return hasHits;
         }
@@ -105,7 +105,7 @@ namespace ActionCode.ColliderAdapter
 
         public override int TryGetCollidingComponents<T>(int layerMask, T[] components)
         {
-            var results = collider.OverlapCollider(CreateFilter(layerMask), buffer);
+            var results = collider.Overlap(CreateFilter(layerMask), buffer);
             var size = Mathf.Min(results, components.Length);
 
             for (int i = 0; i < size; i++)
